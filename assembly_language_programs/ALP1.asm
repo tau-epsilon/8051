@@ -1,0 +1,24 @@
+; ALP to move n bytes from 20H to 40H
+	ORG	0000H
+;;; MOVING data into src to verify later
+	MOV	R5, #5
+	MOV	R0, #20H
+MOVIN:
+	MOV	A, #0FFH
+	MOV	@R0, A
+	INC	R0
+	DJNZ	R5, MOVIN
+;;; MOVING done
+COUNT	EQU	5
+SRC	EQU	20H
+DEST	EQU	40H
+	MOV	R7, #COUNT
+	MOV	R0, #SRC
+	MOV	R1, #DEST
+MOVING:
+	MOV	A, @R0
+	MOV	@R1, A
+	INC	R0
+	INC	R1
+	DJNZ	R7, MOVING
+	END
